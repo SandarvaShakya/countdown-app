@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import Clock from "./components/Clock";
 
 import './App.css'
+import Button from "./components/Button";
 
 const App = () => {
   const [timerDays, setTimerDays] = useState(0);
@@ -9,6 +10,7 @@ const App = () => {
   const [timerMinutes, setTimerMinutes] = useState(0);
   const [timerSeconds, setTimerSeconds] = useState(0);
   const [checkTimer, setCheckTimer] = useState(true);
+  let intervalId = useRef(0)
 
   let interval
   //Final Time
@@ -18,7 +20,7 @@ const App = () => {
 
   const countDown = () => {
     const countDownDate = new Date(finalTime).getTime()
-    
+
     interval = setInterval(() => {
       const currentDate = new Date().getTime()
       const timeDifference = countDownDate - currentDate
@@ -29,7 +31,7 @@ const App = () => {
       const seconds = Math.floor((timeDifference % (60*1000)) / (1000))
 
       if(timeDifference < 0){
-        clearInterval(interval)
+        clearInterval(intervalId.current)
         setCheckTimer(false)
       }else{
         setTimerDays(days)
@@ -37,23 +39,51 @@ const App = () => {
         setTimerMinutes(minutes)
         setTimerSeconds(seconds)
       }
+      intervalId.current = interval
     })
   }
 
-  useEffect(() => countDown())
+  const reset = () => {
+    if(timerDays !== 0 || timerHours !== 0 || timerMinutes !== 0 || timerSeconds !== 0){
+      const confirmReset = window.confirm('Are you sure you want to reset the timer?')
+      if(confirmReset){
+        clearInterval(intervalId.current)
+        setTimerDays(0)
+        setTimerHours(0)
+        setTimerMinutes(0)
+        setTimerSeconds(0)
+      }
+    }
+    return
+  }
 
   return (
     <div className="wrapper">
-      {
-        checkTimer ? 
-        <Clock 
-          days = {timerDays}
-          hours = {timerHours}
-          minutes = {timerMinutes}
-          seconds = {timerSeconds}
-        /> 
-        : <div className="completed">{finalText}</div>
-      }
+      <h1>Countdown</h1>
+      <div className="clock-container">
+        {
+          checkTimer ?
+          <Clock
+            days = {timerDays}
+            hours = {timerHours}
+            minutes = {timerMinutes}
+            seconds = {timerSeconds}
+          />
+          : <div className="completed">{finalText}</div>
+        }
+      </div>
+      <div className="buttons">
+        <Button
+          handleClick={countDown}
+          text="Start"
+          class='btn btn--start'
+        />
+        <Button
+          handleClick={reset}
+          text="Reset"
+          class='btn btn--reset'
+        />
+      </div>
     </div>
   )
 }

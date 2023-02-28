@@ -5,28 +5,32 @@
 }
 
 .wrapper{
+  background: #25262b;
   height: 100vh;
+  position: relative;
+}
+
+.clock-container{
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #25262b;
-
   padding: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .clock{
   border-radius: 16px;
-
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
-
   background: linear-gradient(180deg, #54428E, #54428E, #54428E, #8963BA);
-
   text-align: center;
   font-size: 1.2em;
-
   box-shadow: 5px 5px 25px 5px #5e44b5;
 }
 
@@ -56,5 +60,46 @@
   font-size: 4rem;
   color: silver;
   text-shadow: 1px 1px 7px;
+}
+
+.wrapper h1{
+  color: silver;
+  text-shadow: 1px 1px 7px;
+  text-align: center;
+  padding-top: 1em;
+}
+
+.buttons{
+  padding: 2em 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn{
+  border: 1px solid red;
+  padding: 1em;
+  border: none;
+  border-radius: 8px;
+  /* width: 25%; */
+  font-size: 1.2rem;
+}
+
+.btn--reset{
+  background-color: rgb(202, 8, 8);
+  color: silver;
+  text-shadow: 1px 1px 10px;
+}
+
+.btn--start{
+  background-color: rgb(33, 78, 31);
+  color: silver;
+  text-shadow: 1px 1px 10px;
+}
+
+@media (min-width: 700px){
+  .buttons{
+    width: 50%;
+    margin: auto;
+  }
 }
 
