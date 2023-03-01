@@ -22,7 +22,7 @@ const App = () => {
 
   let interval
   //Final Time
-  const finalTime = `${month} ${date}, ${year}` //Set your time here in the same format
+  const finalTime = `${year}-${month}-${date}` //Set your time here in the same format
    //Text After Countdown
   const finalText = "Hurrah!!!" //Set your text here
 
