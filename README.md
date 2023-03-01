@@ -4,7 +4,7 @@ See a coutdown timer for anything you like.:sparkles: :sparkles:
 
 ## Usage
 
-Change the time and text in the code to start the coutdown.
+Select date from the dropdows and press start for the countdown to start.
 
 ## Setting Up Locally
 
