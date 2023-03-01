@@ -1,4 +1,4 @@
-const Form = (props) => {
+const DateSelect = (props) => {
     const months = [
         {
             id: 1,
@@ -66,54 +66,58 @@ const Form = (props) => {
     const currentYear = new Date().getFullYear()
     const years = [...Array(10).keys()].map(x => x+currentYear)
 
-    const currentMonth = months.find(month => month.id === new Date().getMonth() + 1).monthName
-
     const handleMonthChange = (event) => {
-        console.log(event.target.value);
         props.setMonth(event.target.value)
     }
 
     const handleDateChange = (event) => {
-        console.log(event.target.value);
         props.setDate(event.target.value)
     }
 
     const handleYearChange = (event) => {
-        console.log(event.target.value);
         props.setYear(event.target.value)
     }
 
     return (
-        <div>
-            <p>Months</p>
-            <select 
-                onChange={(event) => handleMonthChange(event)} 
-                defaultValue={currentMonth}
-            >
-                {months.map(month => 
-                    <option value={month.monthValue} key={month.id}>{month.monthName}</option>
-                )}
-            </select>
-            <p>Date</p>
-            <select 
-                onChange={(event) => handleDateChange(event)} 
-                defaultValue={new Date().getDate() + 1}
-            >
-                {dates.map(date => 
-                    <option value={date} key={date}>{date}</option>
-                )}
-            </select>
-            <p>Year</p>
-            <select 
-                onChange={(event) => handleYearChange(event)}
-                defaultValue={new Date().getFullYear()}
-            >
-                {years.map(year => 
-                    <option value={year} key={year}>{year}</option>
-                )}
-            </select>
+        <div className="date-form">
+            <div className="date">
+                <p>Months</p>
+                <select
+                    onChange={(event) => handleMonthChange(event)}
+                    defaultValue={months.find(month => month.id === new Date().getMonth() + 1).monthValue}
+                    className="select"
+                >
+                    {months.map(month =>
+                        <option value={month.monthValue} key={month.id}>{month.monthName}</option>
+                    )}
+                </select>
+            </div>
+            <div className="date">
+                <p>Date</p>
+                <select
+                    onChange={(event) => handleDateChange(event)}
+                    defaultValue={new Date().getDate() + 1}
+                    className="select"
+                >
+                    {dates.map(date =>
+                        <option value={date} key={date}>{date}</option>
+                    )}
+                </select>
+            </div>
+            <div className="date">
+                <p>Year</p>
+                <select
+                    onChange={(event) => handleYearChange(event)}
+                    defaultValue={new Date().getFullYear()}
+                    className="select"
+                >
+                    {years.map(year =>
+                        <option value={year} key={year}>{year}</option>
+                    )}
+                </select>
+            </div>
         </div>
     )
 }
 
-export default Form
+export default DateSelect

@@ -15,7 +15,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -96,8 +95,31 @@
   text-shadow: 1px 1px 10px;
 }
 
+.date-form{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.date-form p{
+  color: silver;
+  text-align: center;
+  text-shadow: 1px 1px 7px;
+}
+
+.select{
+  margin-top: 0.55em;
+  border: none;
+  border-radius: 8px;
+  padding: 1em;
+}
+
+.select::after{
+  border: 1px solid red;
+}
+
 @media (min-width: 700px){
-  .buttons{
+  .buttons, .date-form{
     width: 50%;
     margin: auto;
   }

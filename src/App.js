@@ -3,7 +3,7 @@ import Clock from "./components/Clock";
 
 import './App.css'
 import Button from "./components/Button";
-import Form from "./components/Form";
+import DateSelect from "./components/DateSelect";
 
 const App = () => {
   const [timerDays, setTimerDays] = useState(0);
@@ -96,7 +96,7 @@ const App = () => {
           class='btn btn--reset'
         />
       </div>
-      <Form 
+      <DateSelect 
         setDate={setDate}
         setMonth={setMonth}
         setYear={setYear}
