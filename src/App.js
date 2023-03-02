@@ -13,6 +13,7 @@ const App = () => {
 
   const [start, setStart] = useState(false);
   const [checkTimer, setCheckTimer] = useState(true);
+  const [error, setError] = useState();
 
   const [month, setMonth] = useState(new Date().getMonth() + 1)
   const [date, setDate] = useState(new Date().getDate() + 1)
@@ -22,12 +23,20 @@ const App = () => {
 
   let interval
   //Final Time
-  const finalTime = `${year}/${month}/${date}  00:00:00` //Set your time here in the same format
+  const finalTime = `${year}/${month}/${date} 00:00:00` //Set your time here in the same format
    //Text After Countdown
   const finalText = "Hurrah!!!" //Set your text here
 
   const countDown = () => {
     const countDownDate = new Date(finalTime).getTime()
+
+    if(Math.floor(countDownDate - new Date().getTime() < 0)){
+      setError('Oops, you entered a past time');
+      setTimeout(() => {
+        setError(null)
+      }, 2000)
+      return
+    }
 
     if(start === false){
       setStart(true)
@@ -43,6 +52,9 @@ const App = () => {
         if(timeDifference < 0){
           clearInterval(intervalId.current)
           setCheckTimer(false)
+          setTimeout(() => {
+            setCheckTimer(true);
+          }, 5000)
         }else{
           setTimerDays(days)
           setTimerHours(hours)
@@ -65,8 +77,13 @@ const App = () => {
         setTimerSeconds(0)
         setStart(false)
       }
+    } else {
+      setError("The countdown is already reset, Press Start to start countdown")
+      setTimeout(() => {
+        setError(null)
+      }, 3000)
+      return
     }
-    return
   }
 
   return (
@@ -96,6 +113,10 @@ const App = () => {
           class='btn btn--reset'
         />
       </div>
+      {
+      error ? 
+        <p className="error">{error}</p> : ''
+      }
       <DateSelect 
         setDate={setDate}
         setMonth={setMonth}
